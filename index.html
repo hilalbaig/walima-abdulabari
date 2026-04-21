@@ -150,6 +150,7 @@
         Lock: (props) => <IconWrapper {...props}><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></IconWrapper>,
         Trash2: (props) => <IconWrapper {...props}><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></IconWrapper>,
         ThumbsUp: (props) => <IconWrapper {...props}><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></IconWrapper>,
+        AlertCircle: (props) => <IconWrapper {...props}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></IconWrapper>,
       };
 
       // --- CONSTANTS & LOGIC ---
@@ -483,7 +484,7 @@
 
         useEffect(() => {
           const t = setInterval(() => {
-            const diff = new Date('2026-04-25T20:00:00') - new Date();
+            const diff = new Date('2026-04-25T19:00:00') - new Date();
             if (diff > 0) setTimeLeft({ d: Math.floor(diff/(1000*60*60*24)), h: Math.floor((diff/(1000*60*60))%24), m: Math.floor((diff/1000/60)%60), s: Math.floor((diff/1000)%60) });
           }, 1000);
           return () => clearInterval(t);
@@ -544,7 +545,7 @@
                             {/* Refined Date Number: Thinner, Italic, Elegant */}
                             <span className="text-7xl md:text-8xl font-serif italic text-rose-600 mx-2 font-normal leading-none" style={{ fontFamily: '"Playfair Display", serif' }}>25</span>
                             <div className="h-12 w-px bg-gold-400"></div>
-                            <span className="text-2xl md:text-3xl font-serif italic tracking-wide whitespace-nowrap text-rose-800">8 - 11 PM</span>
+                            <span className="text-2xl md:text-3xl font-serif italic tracking-wide whitespace-nowrap text-rose-800">7 - 10 PM</span>
                         </div>
                         <h3 className="text-lg md:text-xl tracking-[0.5em] text-slate-600 uppercase mt-4 font-sans font-light">2026</h3>
                         <p className="text-gold-600 font-serif italic text-sm mt-2">Dinner</p>
@@ -572,7 +573,7 @@
                     </div>
 
                     {/* Save Date Button */}
-                    <button onClick={() => window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walima+Ceremony+of+Abdul+Bari&dates=20260425T200000/20260425T230000&details=Walima+Ceremony+Dinner&location=${encodeURIComponent(WEDDING_DETAILS.venue.name)}&sf=true&output=xml`, '_blank')}
+                    <button onClick={() => window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walima+Ceremony+of+Abdul+Bari&dates=20260425T190000/20260425T220000&details=Walima+Ceremony+Dinner&location=${encodeURIComponent(WEDDING_DETAILS.venue.name)}&sf=true&output=xml`, '_blank')}
                         className="bg-gradient-to-r from-gold-400 to-yellow-500 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all flex items-center gap-2 mb-8">
                         <Icons.Calendar className="w-5 h-5"/> Add to Calendar
                     </button>
@@ -645,12 +646,53 @@
         </footer>
       );
 
+      const ImportantNotice = () => (
+        <div className="w-full max-w-2xl mx-auto px-4 mt-12 mb-4 animate-float relative z-20">
+          <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 border-2 border-rose-100 shadow-xl relative overflow-hidden group">
+            {/* Decorative bar */}
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-gold-400 via-rose-400 to-gold-400"></div>
+            
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
+              <div className="bg-rose-100 p-3 rounded-full text-rose-600 animate-pulse shrink-0">
+                <Icons.AlertCircle className="w-8 h-8" />
+              </div>
+              
+              <div className="text-center md:text-left">
+                <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
+                  <span className="bg-gold-100 text-gold-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest border border-gold-200">
+                    Important Notice
+                  </span>
+                </div>
+                <h3 className="font-serif text-xl font-bold text-rose-900 mb-3 leading-tight">
+                  Event Timing Update
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed font-sans">
+                  In light of the recent KP government notification requiring hotels to close after 10:00 PM, 
+                  all invitees are requested to kindly attend the event within the scheduled time of 
+                  <span className="font-bold text-rose-700 mx-1">7:00 PM to 10:00 PM</span>.
+                </p>
+                <p className="text-slate-500 text-xs mt-3 italic">
+                  Your cooperation will help ensure a smooth and inconvenience-free experience for everyone. 
+                  Thank you for your understanding.
+                </p>
+              </div>
+            </div>
+
+            {/* Subtle corner ornament */}
+            <div className="absolute bottom-[-10px] right-[-10px] text-rose-50 opacity-20 transform rotate-12 group-hover:rotate-45 transition-transform duration-700">
+               <Icons.AlertCircle className="w-24 h-24" />
+            </div>
+          </div>
+        </div>
+      );
+
       const App = () => {
         const { counts, handleReact } = useTracker();
 
         return (
           <>
             <PetalBackground />
+            <ImportantNotice />
             <InvitationCard counts={counts} />
             <Footer />
             <ReactionDock counts={counts} onReact={handleReact} />
